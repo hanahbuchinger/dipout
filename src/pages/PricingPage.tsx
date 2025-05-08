@@ -4,15 +4,6 @@ import { CreditCard, Check, ArrowRight, Shield, Star, Zap, Users, BarChart3, Dol
 
 const PricingPage = () => {
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    const trialStartDate = localStorage.getItem('trialStartDate');
-    if (!trialStartDate) {
-      navigate('/signup');
-      return;
-    }
-  }, [navigate]);
-
   const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'annual'>('annual');
 
   const plans = {
