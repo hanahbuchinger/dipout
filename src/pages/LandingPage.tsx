@@ -58,6 +58,11 @@ const LandingPage = () => {
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
             src="https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="Restaurant staff using tablet"
+            loading="eager"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg";
+            }}
           />
         </div>
       </div>

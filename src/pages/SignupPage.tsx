@@ -31,9 +31,6 @@ const SignupPage = () => {
     e.preventDefault();
     
     try {
-      // Clear any existing customer data for new signups
-      localStorage.removeItem('customers');
-      
       // Update settings with establishment info
       updateSettings({
         restaurantName: formData.establishmentName,
@@ -45,6 +42,10 @@ const SignupPage = () => {
           country: formData.country
         }
       });
+      
+      // Store email for later use
+      localStorage.setItem('userEmail', formData.email);
+      localStorage.setItem('restaurantName', formData.establishmentName);
       
       // Set trial start date
       localStorage.setItem('trialStartDate', new Date().toISOString());

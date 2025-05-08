@@ -12,11 +12,13 @@ const PaywallWrapper: React.FC<PaywallWrapperProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [daysLeft, setDaysLeft] = useState(7);
 
-  // Check if user has completed signup
+  // Check if user has completed signup and payment
   useEffect(() => {
-    const trialStartDate = localStorage.getItem('trialStartDate');
-    if (!trialStartDate) {
-      navigate('/signup');
+    const subscriptionStatus = localStorage.getItem('subscriptionStatus');
+    const paymentStatus = localStorage.getItem('paymentStatus');
+    
+    if (!subscriptionStatus || !paymentStatus) {
+      navigate('/app/pricing');
       return;
     }
   }, [navigate]);
@@ -31,7 +33,7 @@ const PaywallWrapper: React.FC<PaywallWrapperProps> = ({ children }) => {
         setIsSubscribed(true);
       } else {
         if (!trialStartDate) {
-          navigate('/signup');
+          navigate('/app/pricing');
           return;
         }
         
@@ -81,7 +83,7 @@ const PaywallWrapper: React.FC<PaywallWrapperProps> = ({ children }) => {
               </div>
               <div className="ml-auto">
                 <button
-                  onClick={() => navigate('/pricing')}
+                  onClick={() => navigate('/app/pricing')}
                   className="text-sm font-medium text-red-900 hover:text-red-800 flex items-center"
                 >
                   Upgrade Now <ArrowRight size={16} className="ml-1" />
@@ -115,7 +117,7 @@ const PaywallWrapper: React.FC<PaywallWrapperProps> = ({ children }) => {
           <p className="text-gray-600 text-sm mb-3">Track no-shows and flag repeat offenders</p>
           <p className="text-red-900 font-bold mb-4">Starting at $14.99/month</p>
           <button 
-            onClick={() => navigate('/pricing')}
+            onClick={() => navigate('/app/pricing')}
             className="w-full py-2 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800 transition-colors"
           >
             Choose Plan
@@ -130,7 +132,7 @@ const PaywallWrapper: React.FC<PaywallWrapperProps> = ({ children }) => {
           <p className="text-gray-600 text-sm mb-3">Advanced protection and revenue optimization</p>
           <p className="text-red-900 font-bold mb-4">Starting at $19.99/month</p>
           <button 
-            onClick={() => navigate('/pricing')}
+            onClick={() => navigate('/app/pricing')}
             className="w-full py-2 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800 transition-colors"
           >
             Choose Plan

@@ -7,7 +7,6 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
-  // Check if user has completed signup
   useEffect(() => {
     const trialStartDate = localStorage.getItem('trialStartDate');
     if (!trialStartDate) {
@@ -46,19 +45,39 @@ const PaymentPage = () => {
     }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
     
-    // Simulate payment processing
-    setTimeout(() => {
+    try {
+      localStorage.setItem('paymentStatus', 'active');
+      
+      const customerInfo = {
+        restaurantName: localStorage.getItem('restaurantName') || '',
+        email: localStorage.getItem('userEmail') || '',
+        plan: location.state?.tier === 'proPlus' ? 'Pro Plus' : 'Pro',
+        trialEndDate: new Date(new Date().setDate(new Date().getDate() + 7)).toISOString(),
+      };
+
+      await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/payment-notification`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ customerInfo }),
+      });
+
       setIsProcessing(false);
       setShowInstallInstructions(true);
       toast.success('Payment successful! Your subscription is now active.', {
         icon: <Check className="text-green-500" />,
         duration: 5000,
       });
-    }, 2000);
+    } catch (error) {
+      setIsProcessing(false);
+      toast.error('There was an error processing your payment. Please try again.');
+    }
   };
   
   if (showInstallInstructions) {
