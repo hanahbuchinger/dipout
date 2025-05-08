@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -10,6 +10,8 @@ import Settings from './pages/Settings';
 import SubscriptionPage from './pages/SubscriptionPage';
 import PaymentPage from './pages/PaymentPage';
 import PricingPage from './pages/PricingPage';
+import SignupPage from './pages/SignupPage';
+import LandingPage from './pages/LandingPage';
 import PaywallWrapper from './components/PaywallWrapper';
 import { NoShowProvider } from './context/NoShowContext';
 
@@ -19,7 +21,9 @@ function App() {
       <Router>
         <Toaster position="top-right" />
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/app" element={<Layout />}>
             <Route index element={<PaywallWrapper><Dashboard /></PaywallWrapper>} />
             <Route path="capture" element={<PaywallWrapper><CaptureNoShow /></PaywallWrapper>} />
             <Route path="lookup" element={<PaywallWrapper><CustomerLookup /></PaywallWrapper>} />
@@ -29,6 +33,7 @@ function App() {
             <Route path="settings/billing" element={<SubscriptionPage />} />
             <Route path="settings/payment" element={<PaymentPage />} />
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </NoShowProvider>

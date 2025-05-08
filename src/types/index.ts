@@ -12,12 +12,21 @@ export interface Customer {
   noShows: NoShowEvent[];
 }
 
+export interface Location {
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+}
+
 export interface Settings {
   yellowThreshold: number;
   redThreshold: number;
   enableTextNotifications: boolean;
   restaurantName: string;
   restaurantId: string;
+  location?: Location;
   subscriptionStatus: 'trial' | 'active' | 'expired' | 'none';
   subscriptionPlan: 'none' | 'pro' | 'proPlus';
   trialEndDate?: string;

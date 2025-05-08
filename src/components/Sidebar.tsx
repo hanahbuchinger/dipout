@@ -14,10 +14,7 @@ const Sidebar = () => {
     <div className="h-full flex flex-col">
       {/* Logo area */}
       <div className="flex items-center justify-center p-6 border-b">
-        <div className="w-12 h-12 bg-[#38B6FF] rounded-full flex items-center justify-center">
-          <span className="text-white text-3xl font-bold">D</span>
-        </div>
-        <h1 className="text-xl font-bold text-gray-800 ml-2">Dipout</h1>
+        <img src="https://i.imgur.com/kHROaT6.png" alt="Dipout Logo" className="h-12 w-auto" />
       </div>
       
       {/* Navigation */}
@@ -30,8 +27,8 @@ const Sidebar = () => {
                 className={({ isActive }) =>
                   `flex items-center px-4 py-3 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-gray-600 hover:bg-gray-100'
+                      ? 'bg-red-50 text-red-900'
+                      : 'text-gray-600 hover:bg-[#E5DDD3]/20'
                   }`
                 }
               >

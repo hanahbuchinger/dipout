@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { CreditCard, Lock, ArrowLeft, Check, Shield } from 'lucide-react';
+import { CreditCard, Lock, ArrowLeft, Check, Shield, Smartphone } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // Check if user has completed signup
+  useEffect(() => {
+    const trialStartDate = localStorage.getItem('trialStartDate');
+    if (!trialStartDate) {
+      navigate('/signup');
+      return;
+    }
+  }, [navigate]);
+
   const planData = location.state || { 
     plan: 'annual', 
     tier: 'pro',
-    price: '$299.99',
+    price: '$150',
     period: 'year'
   };
   
@@ -26,6 +36,7 @@ const PaymentPage = () => {
   });
   
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showInstallInstructions, setShowInstallInstructions] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -42,13 +53,76 @@ const PaymentPage = () => {
     // Simulate payment processing
     setTimeout(() => {
       setIsProcessing(false);
+      setShowInstallInstructions(true);
       toast.success('Payment successful! Your subscription is now active.', {
         icon: <Check className="text-green-500" />,
         duration: 5000,
       });
-      navigate('/settings');
     }, 2000);
   };
+  
+  if (showInstallInstructions) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Check size={32} className="text-green-600" />
+          </div>
+          
+          <h2 className="text-2xl font-bold text-gray-800 mb-3">Welcome to Dipout!</h2>
+          
+          <p className="text-gray-600 mb-8">
+            Install Dipout on your device for quick access:
+          </p>
+          
+          <div className="space-y-8">
+            <div className="bg-blue-50 p-6 rounded-lg">
+              <h3 className="font-bold text-gray-800 mb-4">iPhone/iPad Installation</h3>
+              <ol className="text-left space-y-3">
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3">1</span>
+                  <span>Tap the Share button (square with arrow)</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3">2</span>
+                  <span>Scroll and tap "Add to Home Screen"</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3">3</span>
+                  <span>Tap Add — now Dipout is just a tap away!</span>
+                </li>
+              </ol>
+            </div>
+            
+            <div className="bg-green-50 p-6 rounded-lg">
+              <h3 className="font-bold text-gray-800 mb-4">Android Installation</h3>
+              <ol className="text-left space-y-3">
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">1</span>
+                  <span>Tap the three dots (top right)</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">2</span>
+                  <span>Choose "Add to Home screen"</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">3</span>
+                  <span>Confirm and you're done!</span>
+                </li>
+              </ol>
+            </div>
+          </div>
+          
+          <button
+            onClick={() => navigate('/')}
+            className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+      </div>
+    );
+  }
   
   return (
     <div className="max-w-3xl mx-auto">

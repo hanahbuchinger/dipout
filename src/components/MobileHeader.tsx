@@ -18,14 +18,11 @@ const MobileHeader = () => {
     <>
       <div className="flex items-center justify-between p-4 border-b bg-white">
         <div className="flex items-center">
-          <div className="w-8 h-8 bg-[#38B6FF] rounded-full flex items-center justify-center mr-2">
-            <span className="text-white text-xl font-bold">D</span>
-          </div>
-          <h1 className="text-lg font-bold text-gray-800">Dipout</h1>
+          <img src="https://i.imgur.com/kHROaT6.png" alt="Dipout Logo" className="h-8 w-auto mr-2" />
         </div>
         <button
           onClick={toggleMenu}
-          className="text-gray-700 hover:text-blue-600 focus:outline-none"
+          className="text-gray-700 hover:text-red-900 focus:outline-none"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -38,7 +35,7 @@ const MobileHeader = () => {
             <div className="flex justify-end p-4 border-b">
               <button
                 onClick={toggleMenu}
-                className="text-gray-700 hover:text-blue-600 focus:outline-none"
+                className="text-gray-700 hover:text-red-900 focus:outline-none"
               >
                 <X size={24} />
               </button>
@@ -52,8 +49,8 @@ const MobileHeader = () => {
                       className={({ isActive }) =>
                         `flex items-center px-4 py-3 rounded-lg transition-colors ${
                           isActive
-                            ? 'bg-blue-50 text-blue-700'
-                            : 'text-gray-600 hover:bg-gray-100'
+                            ? 'bg-red-50 text-red-900'
+                            : 'text-gray-600 hover:bg-[#E5DDD3]/20'
                         }`
                       }
                       onClick={toggleMenu}
