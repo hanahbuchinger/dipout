@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Check, ArrowRight, DollarSign, Clock, Users } from 'lucide-react';
+import { Shield, Check, ArrowRight, DollarSign, Clock, Users, Star, BarChart3, Bell, ChefHat, Utensils, Smartphone } from 'lucide-react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,10 +16,16 @@ const LandingPage = () => {
             </div>
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => navigate('/signup')}
-                className="px-4 py-2 text-red-900 hover:text-red-800"
+                onClick={() => navigate('/login')}
+                className="px-4 py-2 text-gray-700 hover:text-gray-900"
               >
-                Sign Up
+                Sign In
+              </button>
+              <button
+                onClick={() => navigate('/signup')}
+                className="px-4 py-2 bg-red-900 text-white rounded-lg hover:bg-red-800"
+              >
+                Start Now
               </button>
             </div>
           </div>
@@ -37,7 +43,7 @@ const LandingPage = () => {
                   <span className="block text-red-900">YOUR KITCHEN</span>
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Smarter prep. Less waste. More control.
+                  Stop losing money on no-shows. Start protecting your business with smart tracking and insights.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
@@ -45,7 +51,7 @@ const LandingPage = () => {
                       onClick={() => navigate('/signup')}
                       className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-[#E5DDD3] bg-red-900 hover:bg-red-800 md:py-4 md:text-lg md:px-10"
                     >
-                      Start Free Trial <ArrowRight className="ml-2" size={20} />
+                      Start Now <ArrowRight className="ml-2" size={20} />
                     </button>
                   </div>
                 </div>
@@ -56,13 +62,9 @@ const LandingPage = () => {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            alt="Restaurant staff using tablet"
+            src="https://i.imgur.com/Q1vCAD2.jpg"
+            alt="Restaurant tablet ordering system"
             loading="eager"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg";
-            }}
           />
         </div>
       </div>
@@ -87,106 +89,135 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="py-16">
+      {/* How It Works Section */}
+      <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-900">Why Kitchens Love Dipout</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900">How Dipout Works</h2>
+            <p className="mt-4 text-lg text-gray-600">Simple steps to protect your business</p>
           </div>
+          
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Clock className="h-6 w-6 text-red-900" />
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Smartphone className="h-8 w-8 text-red-900" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Instant Lookup</h3>
-              <p className="text-gray-600">
-                Check a customer's flake score using just their phone number — no app download required.
-              </p>
+              <h3 className="text-xl font-bold mb-2">1. Enter Phone Number</h3>
+              <p className="text-gray-600">Quick lookup using customer's phone number</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-red-900" />
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BarChart3 className="h-8 w-8 text-red-900" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Smart Protection</h3>
-              <p className="text-gray-600">
-                Flag repeat offenders and get prep recommendations based on customer history.
-              </p>
+              <h3 className="text-xl font-bold mb-2">2. Check History</h3>
+              <p className="text-gray-600">See past behavior and reliability score</p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                <DollarSign className="h-6 w-6 text-red-900" />
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ChefHat className="h-8 w-8 text-red-900" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Revenue Guard</h3>
-              <p className="text-gray-600">
-                Track lost revenue and make data-driven decisions to protect your bottom line.
-              </p>
+              <h3 className="text-xl font-bold mb-2">3. Make Smart Decisions</h3>
+              <p className="text-gray-600">Get recommendations for handling orders</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Pricing Section */}
-      <div className="bg-[#E5DDD3]/10 py-16">
+      {/* Features Grid */}
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-900">Simple, Transparent Pricing</h2>
+            <h2 className="text-3xl font-extrabold text-gray-900">Everything You Need</h2>
+            <p className="mt-4 text-lg text-gray-600">Comprehensive tools to manage no-shows effectively</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">Pro Plan</h3>
-              <p className="text-4xl font-bold text-red-900 mb-4">$14.99<span className="text-lg text-gray-500">/month</span></p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Full flake scoring</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Prep tools</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Email support</span>
-                </li>
-              </ul>
-              <button
-                onClick={() => navigate('/signup')}
-                className="w-full py-3 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800"
-              >
-                Start Free Trial
-              </button>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg border-2 border-red-900">
-              <div className="inline-block px-4 py-1 bg-red-900 text-[#E5DDD3] rounded-full text-sm mb-4">
-                MOST POPULAR
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Shield className="h-6 w-6" />,
+                title: "Flake Score™",
+                description: "Instantly see customer reliability based on history"
+              },
+              {
+                icon: <Bell className="h-6 w-6" />,
+                title: "Smart Alerts",
+                description: "Get notified about high-risk orders"
+              },
+              {
+                icon: <BarChart3 className="h-6 w-6" />,
+                title: "Analytics Dashboard",
+                description: "Track trends and impact on your business"
+              },
+              {
+                icon: <DollarSign className="h-6 w-6" />,
+                title: "Loss Prevention",
+                description: "Reduce waste and protect your revenue"
+              },
+              {
+                icon: <Users className="h-6 w-6" />,
+                title: "Team Access",
+                description: "Multiple staff members can use the system"
+              },
+              {
+                icon: <Utensils className="h-6 w-6" />,
+                title: "Kitchen Integration",
+                description: "Seamless workflow with your kitchen"
+              }
+            ].map((feature, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Pro+ Plan</h3>
-              <p className="text-4xl font-bold text-red-900 mb-4">$19.99<span className="text-lg text-gray-500">/month</span></p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Everything in Pro</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Team accounts</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Advanced insights</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="h-5 w-5 text-red-900 mr-2" />
-                  <span>Priority support</span>
-                </li>
-              </ul>
-              <button
-                onClick={() => navigate('/signup')}
-                className="w-full py-3 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800"
-              >
-                Start Free Trial
-              </button>
-            </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-gray-900">What Restaurants Say</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "Reduced our no-show losses by 40% in the first month.",
+                author: "Mike Chen",
+                role: "Restaurant Owner"
+              },
+              {
+                quote: "Finally, a simple way to track and prevent no-shows.",
+                author: "Sarah Johnson",
+                role: "Operations Manager"
+              },
+              {
+                quote: "The insights helped us save thousands in wasted prep.",
+                author: "David Martinez",
+                role: "Kitchen Manager"
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-gray-50 p-6 rounded-lg">
+                <div className="flex items-center mb-4">
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  <Star className="h-5 w-5 text-yellow-400" />
+                  <Star className="h-5 w-5 text-yellow-400" />
+                </div>
+                <p className="text-gray-600 mb-4">"{testimonial.quote}"</p>
+                <div>
+                  <p className="font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -197,7 +228,7 @@ const LandingPage = () => {
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-[#E5DDD3] sm:text-4xl">
               <span className="block">Ready to protect your business?</span>
-              <span className="block text-red-100">Start your free trial today.</span>
+              <span className="block text-red-100">Get started today.</span>
             </h2>
             <div className="mt-8 flex justify-center">
               <div className="inline-flex rounded-md shadow">

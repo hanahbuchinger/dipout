@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, MapPin, Mail, Lock, ArrowRight, Check } from 'lucide-react';
+import { Building2, MapPin, Mail, Lock, ArrowRight } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { useNoShow } from '../context/NoShowContext';
+import { supabase } from '../lib/supabase';
 
 const SignupPage = () => {
   const navigate = useNavigate();
-  const { updateSettings } = useNoShow();
-  
-  const [selectedPlan, setSelectedPlan] = useState<'pro' | 'proPlus'>('pro');
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
+  const [isLoading, setIsLoading] = useState(false);
   
   const [formData, setFormData] = useState({
     email: '',
@@ -21,33 +18,6 @@ const SignupPage = () => {
     zipCode: '',
     country: 'US'
   });
-
-  const plans = {
-    pro: {
-      monthly: {
-        price: '$14.99',
-        period: 'month',
-        savings: '',
-      },
-      annual: {
-        price: '$150',
-        period: 'year',
-        savings: 'Save $29.88/year'
-      }
-    },
-    proPlus: {
-      monthly: {
-        price: '$19.99',
-        period: 'month',
-        savings: '',
-      },
-      annual: {
-        price: '$200',
-        period: 'year',
-        savings: 'Save $39.88/year'
-      }
-    }
-  };
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -59,41 +29,38 @@ const SignupPage = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     try {
-      await updateSettings({
-        restaurantName: formData.establishmentName,
-        location: {
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          zipCode: formData.zipCode,
-          country: formData.country
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            restaurant_name: formData.establishmentName,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            zip_code: formData.zipCode,
+            country: formData.country
+          }
         }
       });
 
-      navigate('/settings/payment', {
-        state: {
-          plan: billingCycle,
-          tier: selectedPlan,
-          price: plans[selectedPlan][billingCycle].price,
-          period: plans[selectedPlan][billingCycle].period
-        }
-      });
-      
-      // Store email and plan selection for later use
-      localStorage.setItem('userEmail', formData.email);
+      if (error) throw error;
+
+      // Store restaurant info for later
       localStorage.setItem('restaurantName', formData.establishmentName);
-      localStorage.setItem('selectedPlan', selectedPlan);
-      localStorage.setItem('billingCycle', billingCycle);
+      localStorage.setItem('userEmail', formData.email);
       
-      // Set trial start date
-      localStorage.setItem('trialStartDate', new Date().toISOString());
-      localStorage.setItem('subscriptionStatus', 'trial');
+      // Redirect to pricing page
+      navigate('/pricing');
       
-      toast.success('Account created successfully!');
-    } catch (error) {
-      toast.error('Failed to create account. Please try again.');
+      toast.success('Account created! Please select a plan to continue.');
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to create account');
+    } finally {
+      setIsLoading(false);
     }
   };
   
@@ -107,87 +74,12 @@ const SignupPage = () => {
           Create your account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Start your 7-day free trial today
+          Get started with Dipout today
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-2xl">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {/* Plan Selection */}
-          <div className="mb-8">
-            <div className="flex justify-center mb-6">
-              <div className="bg-gray-100 p-1 rounded-lg inline-flex">
-                <button
-                  onClick={() => setBillingCycle('monthly')}
-                  className={`px-4 py-2 rounded-md ${
-                    billingCycle === 'monthly' 
-                      ? 'bg-white shadow-sm text-red-900' 
-                      : 'text-gray-600'
-                  }`}
-                >
-                  Monthly
-                </button>
-                <button
-                  onClick={() => setBillingCycle('annual')}
-                  className={`px-4 py-2 rounded-md ${
-                    billingCycle === 'annual' 
-                      ? 'bg-white shadow-sm text-red-900' 
-                      : 'text-gray-600'
-                  }`}
-                >
-                  Annual
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {/* Pro Plan */}
-              <div 
-                className={`p-4 rounded-lg border-2 cursor-pointer ${
-                  selectedPlan === 'pro' 
-                    ? 'border-red-900 bg-red-50' 
-                    : 'border-gray-200'
-                }`}
-                onClick={() => setSelectedPlan('pro')}
-              >
-                <h3 className="text-lg font-semibold">Pro</h3>
-                <div className="mt-2">
-                  <p className="text-2xl font-bold text-red-900">
-                    {plans.pro[billingCycle].price}
-                    <span className="text-sm text-gray-500">/{plans.pro[billingCycle].period}</span>
-                  </p>
-                  {plans.pro[billingCycle].savings && (
-                    <p className="text-sm text-green-600">{plans.pro[billingCycle].savings}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Pro Plus Plan */}
-              <div 
-                className={`p-4 rounded-lg border-2 cursor-pointer ${
-                  selectedPlan === 'proPlus' 
-                    ? 'border-red-900 bg-red-50' 
-                    : 'border-gray-200'
-                }`}
-                onClick={() => setSelectedPlan('proPlus')}
-              >
-                <div className="flex justify-between items-start">
-                  <h3 className="text-lg font-semibold">Pro Plus</h3>
-                  <span className="text-xs bg-red-900 text-white px-2 py-1 rounded-full">POPULAR</span>
-                </div>
-                <div className="mt-2">
-                  <p className="text-2xl font-bold text-red-900">
-                    {plans.proPlus[billingCycle].price}
-                    <span className="text-sm text-gray-500">/{plans.proPlus[billingCycle].period}</span>
-                  </p>
-                  {plans.proPlus[billingCycle].savings && (
-                    <p className="text-sm text-green-600">{plans.proPlus[billingCycle].savings}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -338,10 +230,22 @@ const SignupPage = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#E5DDD3] bg-red-900 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-900"
+                disabled={isLoading}
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-[#E5DDD3] bg-red-900 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-900 ${
+                  isLoading ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
               >
-                Continue to Payment
-                <ArrowRight className="ml-2 h-5 w-5" />
+                {isLoading ? (
+                  <>
+                    <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
+                    Creating Account...
+                  </>
+                ) : (
+                  <>
+                    Continue to Select Plan
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </>
+                )}
               </button>
             </div>
           </form>

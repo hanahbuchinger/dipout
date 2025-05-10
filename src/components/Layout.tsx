@@ -2,6 +2,8 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import MobileHeader from './MobileHeader';
+import SubscriptionStatus from './SubscriptionStatus';
+import InstallPWA from './InstallPWA';
 
 const Layout = () => {
   return (
@@ -16,6 +18,12 @@ const Layout = () => {
         {/* Mobile Header - visible only on mobile */}
         <div className="md:hidden">
           <MobileHeader />
+        </div>
+        
+        {/* Subscription Status and Install Button */}
+        <div className="p-4 flex justify-end items-center space-x-4">
+          <InstallPWA />
+          <SubscriptionStatus />
         </div>
         
         {/* Content area */}

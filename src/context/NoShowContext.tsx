@@ -2,43 +2,14 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { Customer, NoShowEvent, Settings } from '../types';
 import { calculateFlakeScore } from '../utils/flakeUtils';
 
-// Initial demo data
-const initialCustomers: Customer[] = [
-  {
-    id: '1',
-    phoneNumber: '555-123-4567',
-    noShows: [
-      { id: '1', date: '2023-06-10T18:30:00', orderType: 'pickup', value: 32.50, notes: 'Pizza and wings' },
-      { id: '2', date: '2023-07-15T19:00:00', orderType: 'call-in', value: 27.99, notes: 'Large pepperoni pizza' }
-    ]
-  },
-  {
-    id: '2',
-    phoneNumber: '555-987-6543',
-    noShows: [
-      { id: '3', date: '2023-08-05T12:15:00', orderType: 'pickup', value: 18.25, notes: 'Sandwich combo' },
-      { id: '4', date: '2023-08-20T13:30:00', orderType: 'pickup', value: 42.75, notes: 'Family meal deal' },
-      { id: '5', date: '2023-09-12T17:45:00', orderType: 'call-in', value: 31.50, notes: 'Pizza and salad' }
-    ]
-  },
-  {
-    id: '3',
-    phoneNumber: '555-456-7890',
-    noShows: [
-      { id: '6', date: '2023-09-01T19:15:00', orderType: 'call-in', value: 24.99, notes: 'Pasta special' }
-    ]
-  }
-];
-
 const initialSettings: Settings = {
   yellowThreshold: 1,
   redThreshold: 3,
   enableTextNotifications: false,
-  restaurantName: "Paolo's Pizza",
-  restaurantId: "12345",
-  subscriptionStatus: "trial",
+  restaurantName: "",
+  restaurantId: "",
+  subscriptionStatus: "none",
   subscriptionPlan: "none",
-  trialEndDate: new Date(new Date().setDate(new Date().getDate() + 14)).toISOString()
 };
 
 type NoShowContextType = {
@@ -58,7 +29,7 @@ type NoShowContextType = {
 const NoShowContext = createContext<NoShowContextType | undefined>(undefined);
 
 export const NoShowProvider = ({ children }: { children: ReactNode }) => {
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [settings, setSettings] = useState<Settings>(initialSettings);
 
   // Load data from localStorage on initial render
@@ -98,13 +69,11 @@ export const NoShowProvider = ({ children }: { children: ReactNode }) => {
     };
 
     setCustomers((prevCustomers) => {
-      // Check if the customer already exists
       const existingCustomerIndex = prevCustomers.findIndex(
         (c) => c.phoneNumber === phoneNumber
       );
 
       if (existingCustomerIndex >= 0) {
-        // Update existing customer
         const updatedCustomers = [...prevCustomers];
         updatedCustomers[existingCustomerIndex] = {
           ...updatedCustomers[existingCustomerIndex],
@@ -112,7 +81,6 @@ export const NoShowProvider = ({ children }: { children: ReactNode }) => {
         };
         return updatedCustomers;
       } else {
-        // Add new customer
         return [
           ...prevCustomers,
           {

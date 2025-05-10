@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreditCard, Check, ArrowRight, Shield, Star, Zap, Users, BarChart3, DollarSign, Clock, Bell } from 'lucide-react';
 
@@ -95,11 +95,11 @@ const PricingPage = () => {
             </div>
             <div className="flex items-center space-x-3 text-gray-700">
               <Check className="text-red-900" size={20} />
-              <span>7-day free trial</span>
+              <span>Cancel anytime</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-700">
               <Check className="text-red-900" size={20} />
-              <span>Cancel anytime</span>
+              <span>24/7 support</span>
             </div>
           </div>
           
@@ -156,7 +156,7 @@ const PricingPage = () => {
                 onClick={handleSelectPro}
                 className="w-full mt-8 py-4 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800 transition-colors font-medium flex items-center justify-center"
               >
-                Start 7-Day Trial <ArrowRight size={18} className="ml-2" />
+                Get Started <ArrowRight size={18} className="ml-2" />
               </button>
             </div>
           </div>
@@ -192,7 +192,7 @@ const PricingPage = () => {
                 onClick={handleSelectProPlus}
                 className="w-full mt-8 py-4 bg-red-900 text-[#E5DDD3] rounded-lg hover:bg-red-800 transition-colors font-medium flex items-center justify-center"
               >
-                Start 7-Day Trial <ArrowRight size={18} className="ml-2" />
+                Get Started <ArrowRight size={18} className="ml-2" />
               </button>
             </div>
           </div>
@@ -235,12 +235,12 @@ const PricingPage = () => {
         <div className="mt-24 text-center">
           <div className="inline-flex items-center justify-center p-1 rounded-full bg-red-100 mb-8">
             <Shield size={20} className="text-red-900" />
-            <span className="text-red-900 text-sm font-medium mx-2">7-Day Free Trial</span>
+            <span className="text-red-900 text-sm font-medium mx-2">Secure Payments</span>
             <Star size={20} className="text-red-900" />
           </div>
           <h2 className="text-3xl font-bold text-gray-800 mb-4">Start Protecting Your Business Today</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Try all features risk-free for 7 days. Credit card required. Cancel anytime during your trial period.
+            Choose your plan and start managing no-shows effectively. Cancel anytime.
           </p>
         </div>
       </div>
