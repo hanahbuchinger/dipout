@@ -62,9 +62,13 @@ const LandingPage = () => {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://i.imgur.com/Q1vCAD2.jpg"
-            alt="Restaurant tablet ordering system"
+            src="https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Restaurant staff using tablet"
             loading="eager"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg";
+            }}
           />
         </div>
       </div>
