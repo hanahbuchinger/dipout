@@ -16,3 +16,14 @@ export const products = {
     mode: 'subscription' as const,
   },
 };
+
+export const stripeConfig = {
+  webhookEndpoint: `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-webhook`,
+  supportedEvents: [
+    'checkout.session.completed',
+    'customer.subscription.created',
+    'customer.subscription.updated',
+    'customer.subscription.deleted',
+    'payment_intent.succeeded'
+  ]
+};
