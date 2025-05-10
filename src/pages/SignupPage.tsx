@@ -79,10 +79,9 @@ const SignupPage = () => {
 
       if (signUpError) throw signUpError;
 
-      // Store restaurant info
-      localStorage.setItem('restaurantName', formData.establishmentName);
-      localStorage.setItem('userEmail', formData.email);
-      
+      // Wait for session to be established
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
       // Get the session
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       
@@ -92,19 +91,31 @@ const SignupPage = () => {
         throw new Error('No session after signup');
       }
 
-      // Navigate to payment with selected plan and auth token
+      // Store restaurant info
+      localStorage.setItem('restaurantName', formData.establishmentName);
+      localStorage.setItem('userEmail', formData.email);
+
+      // Sign in the user immediately after signup
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (signInError) throw signInError;
+
+      // Navigate to payment with selected plan
       navigate('/settings/payment', {
         state: {
           plan: billingCycle,
           tier: selectedPlan,
           price: plans[selectedPlan][billingCycle].price,
-          period: plans[selectedPlan][billingCycle].period,
-          token: session.access_token
+          period: plans[selectedPlan][billingCycle].period
         }
       });
       
       toast.success('Account created! Proceeding to payment...');
     } catch (error: any) {
+      console.error('Signup error:', error);
       toast.error(error.message || 'Failed to create account');
       setIsLoading(false);
     }
