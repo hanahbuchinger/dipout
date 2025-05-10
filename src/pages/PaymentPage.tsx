@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useStripe } from '../hooks/useStripe';
 import { products } from '../stripe-config';
+import { useAuth } from '../context/AuthContext';
 
 const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { createCheckoutSession } = useStripe();
+  const { user } = useAuth();
 
   useEffect(() => {
     const initializeCheckout = async () => {
-      if (!location.state?.tier) {
+      if (!location.state?.tier || !user) {
         navigate('/signup');
         return;
       }
@@ -24,7 +26,7 @@ const PaymentPage = () => {
     };
 
     initializeCheckout();
-  }, [location.state, navigate, createCheckoutSession]);
+  }, [location.state, navigate, createCheckoutSession, user]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">

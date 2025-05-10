@@ -61,7 +61,8 @@ const SignupPage = () => {
     setIsLoading(true);
     
     try {
-      const { error } = await supabase.auth.signUp({
+      // Sign up the user
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -76,26 +77,35 @@ const SignupPage = () => {
         }
       });
 
-      if (error) throw error;
+      if (signUpError) throw signUpError;
 
-      // Store restaurant info for later
+      // Store restaurant info
       localStorage.setItem('restaurantName', formData.establishmentName);
       localStorage.setItem('userEmail', formData.email);
       
-      // Navigate to payment with selected plan
+      // Get the session
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      
+      if (sessionError) throw sessionError;
+      
+      if (!session) {
+        throw new Error('No session after signup');
+      }
+
+      // Navigate to payment with selected plan and auth token
       navigate('/settings/payment', {
         state: {
           plan: billingCycle,
           tier: selectedPlan,
           price: plans[selectedPlan][billingCycle].price,
-          period: plans[selectedPlan][billingCycle].period
+          period: plans[selectedPlan][billingCycle].period,
+          token: session.access_token
         }
       });
       
       toast.success('Account created! Proceeding to payment...');
     } catch (error: any) {
       toast.error(error.message || 'Failed to create account');
-    } finally {
       setIsLoading(false);
     }
   };
