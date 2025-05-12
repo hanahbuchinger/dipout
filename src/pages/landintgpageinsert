@@ -1,1 +1,37 @@
 
+
+      {/* How It Works Section */}
+      <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-gray-900">How Dipout Works</h2>
+            <p className="mt-4 text-lg text-gray-600">Simple steps to protect your business</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Smartphone className="h-8 w-8 text-red-900" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">1. Enter Phone Number</h3>
+              <p className="text-gray-600">Quick lookup using customer's phone number</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BarChart3 className="h-8 w-8 text-red-900" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">2. Check History</h3>
+              <p className="text-gray-600">See past behavior and reliability score</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ChefHat className="h-8 w-8 text-red-900" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">3. Make Smart Decisions</h3>
+              <p className="text-gray-600">Get recommendations for handling orders</p>
+            </div>
+          </div>
+        </div>
+      </div>
