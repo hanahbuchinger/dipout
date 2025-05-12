@@ -12,7 +12,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <img src="https://i.imgur.com/kHROaT6.png" alt="Dipout Logo" className="h-8 w-auto" />
+              <img src="/api/placeholder/200/80" alt="Dipout Logo" className="h-8 w-auto" />
             </div>
             <div className="flex items-center space-x-4">
               <button
@@ -62,13 +62,9 @@ const LandingPage = () => {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src="/api/placeholder/1200/800"
             alt="Restaurant staff using tablet"
             loading="eager"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = "https://images.pexels.com/photos/12935063/pexels-photo-12935063.jpeg";
-            }}
           />
         </div>
       </div>
@@ -182,8 +178,62 @@ const LandingPage = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
+      {/* Why Us Section */}
       <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-gray-900">Why Dipout?</h2>
+          </div>
+
+          {/* Section 1 */}
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto mb-12 bg-white rounded-lg p-8 shadow-md">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <h3 className="text-3xl font-extrabold text-red-900 mb-2">YOUR DIPOUT<br />DASHBOARD.</h3>
+              <p className="text-gray-700 text-xl mb-4">Highlight opportunities</p>
+            </div>
+            <div className="md:w-1/2">
+              <img 
+                src="/api/placeholder/600/340" 
+                alt="Dipout Dashboard" 
+                className="w-full h-auto rounded border border-gray-200 shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Section 2 */}
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto mb-12 bg-white rounded-lg p-8 shadow-md">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <h3 className="text-3xl font-extrabold text-red-900 mb-2">LOG NO<br />SHOWS.</h3>
+              <p className="text-gray-700 text-xl mb-4">Making every customer count</p>
+            </div>
+            <div className="md:w-1/2">
+              <img 
+                src="/api/placeholder/600/340" 
+                alt="Dipout No Shows" 
+                className="w-full h-auto rounded border border-gray-200 shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Section 3 */}
+          <div className="flex flex-col md:flex-row justify-between items-center max-w-6xl mx-auto bg-white rounded-lg p-8 shadow-md">
+            <div className="md:w-1/2 md:pr-8 mb-6 md:mb-0">
+              <h3 className="text-3xl font-extrabold text-red-900 mb-2">YOUR OWN<br />CRM.</h3>
+              <p className="text-gray-700 text-xl mb-4">Making every customer count</p>
+            </div>
+            <div className="md:w-1/2">
+              <img 
+                src="/api/placeholder/600/340" 
+                alt="Dipout Customer Lookup" 
+                className="w-full h-auto rounded border border-gray-200 shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonials */}
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-extrabold text-gray-900">What Restaurants Say</h2>
@@ -207,7 +257,7 @@ const LandingPage = () => {
                 role: "Kitchen Manager"
               }
             ].map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 p-6 rounded-lg">
+              <div key={index} className="bg-white p-6 rounded-lg shadow">
                 <div className="flex items-center mb-4">
                   <Star className="h-5 w-5 text-yellow-400" />
                   <Star className="h-5 w-5 text-yellow-400" />
