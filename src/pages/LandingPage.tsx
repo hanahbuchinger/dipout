@@ -93,6 +93,41 @@ const LandingPage = () => {
         </div>
       </div>
 
+      {/* Feature Highlights Columns */}
+      <div className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          <div className="flex flex-col lg:flex-row items-center">
+            <div className="lg:w-1/2 pr-8">
+              <h3 className="text-3xl font-bold text-red-900 mb-2">Your Dipout Dashboard</h3>
+              <p className="text-lg text-gray-700">Quickly highlight opportunities and trends in your restaurant’s performance.</p>
+            </div>
+            <div className="lg:w-1/2">
+              <img src="dipoutdashboard.png" alt="Dipout Dashboard" className="rounded shadow border border-gray-200" />
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row-reverse items-center">
+            <div className="lg:w-1/2 pl-8">
+              <h3 className="text-3xl font-bold text-red-900 mb-2">Log No Shows</h3>
+              <p className="text-lg text-gray-700">Document every no-show easily and keep your records organized.</p>
+            </div>
+            <div className="lg:w-1/2">
+              <img src="dipoutnoshows.png" alt="Log No Shows" className="rounded shadow border border-gray-200" />
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row items-center">
+            <div className="lg:w-1/2 pr-8">
+              <h3 className="text-3xl font-bold text-red-900 mb-2">Your Own CRM</h3>
+              <p className="text-lg text-gray-700">Every customer counts—track interactions and build loyalty effortlessly.</p>
+            </div>
+            <div className="lg:w-1/2">
+              <img src="dipoutcustomerlookup.png" alt="CRM Customer Lookup" className="rounded shadow border border-gray-200" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Features Grid */}
       <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
