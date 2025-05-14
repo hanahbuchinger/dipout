@@ -102,7 +102,7 @@ const LandingPage = () => {
               <p className="text-lg text-gray-700">Quickly highlight opportunities and trends in your restaurant’s performance.</p>
             </div>
             <div className="lg:w-1/2">
-              <img src="public/imgs/dipoutdashboard.png" alt="Dipout Dashboard" className="rounded shadow border border-gray-200" />
+              <img src="imgs/dipoutdashboard.png" alt="Dipout Dashboard" className="rounded shadow border border-gray-200" />
             </div>
           </div>
 
@@ -112,7 +112,7 @@ const LandingPage = () => {
               <p className="text-lg text-gray-700">Document every no-show easily and keep your records organized.</p>
             </div>
             <div className="lg:w-1/2">
-              <img src="public/imgs/dipoutnoshows.png" alt="Log No Shows" className="rounded shadow border border-gray-200" />
+              <img src="imgs/dipoutnoshows.png" alt="Log No Shows" className="rounded shadow border border-gray-200" />
             </div>
           </div>
 
@@ -122,7 +122,7 @@ const LandingPage = () => {
               <p className="text-lg text-gray-700">Every customer counts—track interactions and build loyalty effortlessly.</p>
             </div>
             <div className="lg:w-1/2">
-              <img src="public/imgs/dipoutdashboard.png" alt="Dipout Dashboard" className="rounded shadow border border-gray-200" />
+              <img src="imgs/dipoutdashboard.png" alt="Dipout Dashboard" className="rounded shadow border border-gray-200" />
             </div>
           </div>
         </div>
